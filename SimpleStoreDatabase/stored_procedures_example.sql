@@ -31,7 +31,8 @@ BEGIN
     UPDATE products
     SET products.price = products.price * (1 - discount_percent / 100)
     WHERE products.section = section;
-    RAISE NOTICE 'All prices of products from % section had been decreased by %%%', section, discount_percent;
+    RETURNING * INTO updated_count; -- Save the number of updated products in this variable "updated_count" to be mentioned in the RAISE NOTICE
+    RAISE NOTICE 'All prices of % products from % section had been decreased by %%%', updated_count, section, discount_percent;
 END;
 $$;
 

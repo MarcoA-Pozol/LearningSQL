@@ -19,3 +19,10 @@ GRANT CREATE ON SCHEMA public TO new_user; -- Let new user to create schemas
 -- Avoid giving admin-level permissions to the new user
 ALTER USER new_user WITH NOSUPERUSER NOCREATEDB NOCREATEROLE NOINHERIT NOREPLICATION; -- Cannot create other DBs or roles. Not replication or system-level permissions
 
+/* Second Example for Admin-Level User */
+psql -U postgres
+CREATE USER username WITH PASSWORD 'password';
+GRANT CONNECT ON database TO username;
+GRANT USAGE ON SCHEMA public TO username;
+GRANT CREATE ON SCHEMA public TO username;
+ALTER USER username WITH SUPERUSER CREATEDB CREATEROLE INHERIT REPLICATION;

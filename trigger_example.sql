@@ -1,7 +1,7 @@
 -- Simple PostgreSQL trigger that executes data inserting on another table after inserting data in the linked table (After Insert)
 
 -- Create products a products_log tables
-CREATE TABLE IF NOT EXISTS products (product_code TEXT NOT NULL, name TEXT NOT NULL, price NUMERIC(10, 2) NOT NULL, quantity INTEGER NOT NULL, provider TEXT NOT NULL, country TEXT NOT NULL);
+CREATE TABLE IF NOT EXISTS products (product_code TEXT NOT NULL, name TEXT NOT NULL, price NUMERIC(10, 2) NOT NULL, quantity INTEGER NOT NULL, section TEXT NOT NULL, provider TEXT NOT NULL, country TEXT NOT NULL);
 
 CREATE TABLE IF NOT EXISTS products_log(product_code TEXT NOT NULL, name TEXT NOT NULL, creator_name TEXT NOT NULL, created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP);
 

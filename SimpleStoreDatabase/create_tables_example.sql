@@ -19,7 +19,7 @@ CREATE TABLE IF NOT EXISTS products_log(id SERIAL PRIMARY KEY, product_id REFERE
 
 /* USERS */
 -- Creating customers table
-CREATE TABLE IF NOT EXISTS customers (id SERIAL PRIMARY KEY, firstname VARCHAR(100) NOT NULL, lastname VARCHAR(100) NOT NULL, age INTEGER NOT NULL, gender VARCHAR(50) NOT NULL, country_id REFERENCES countries(id) NOT NULL, ocupation VARCHAR(200) DEFAULT 'Worker' NULL, email TEXT NOT NULL UNIQUE CHECK (email ~* '^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$') NULL, phone VARCHAR(15) CHECK (phone ~ '^[0-9+\-()\s]+$') NULL)
+CREATE TABLE IF NOT EXISTS customers (id SERIAL PRIMARY KEY, firstname VARCHAR(100) NOT NULL, lastname VARCHAR(100) NOT NULL, age INTEGER NOT NULL, gender VARCHAR(50) NOT NULL, country_id REFERENCES countries(id) NOT NULL, ocupation VARCHAR(200) DEFAULT 'Worker' NULL, email TEXT NOT NULL UNIQUE CHECK (email ~* '^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$') NULL, phone VARCHAR(15) CHECK (phone ~ '^[0-9+\-()\s]+$') NULL, profile_picture TEXT DEFAULT 'profile_pictures/default.jpg');
 
 -- Creating employees table
 -- Pending

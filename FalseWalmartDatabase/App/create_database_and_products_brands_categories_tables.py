@@ -6,7 +6,7 @@ db = DatabaseConnection('FalseWalmartDB')
 # Create categories table
 def create_categories_table() -> None:
     try:
-        db.execute_query("""CREATE TABLE IF NOT EXISTS Categories (id INTEGER PRIMARY KEY AUTOINCREMENT, name VARCHAR(100) NOT NULL DEFAULT 'Other', description TEXT NOT NULL DEFAULT '', created_at DATETIME DEFAULT CURRENT_TIMESTAMP,  updated_at DATETIME DEFAULT CURRENT_TIMESTAMP)""")
+        db.execute_query("""CREATE TABLE IF NOT EXISTS Categories (id INTEGER PRIMARY KEY AUTOINCREMENT, name VARCHAR(100) NOT NULL UNIQUE, description TEXT NOT NULL DEFAULT '', created_at DATETIME DEFAULT CURRENT_TIMESTAMP,  updated_at DATETIME DEFAULT CURRENT_TIMESTAMP)""")
         db.database.commit()
         print('Categories table: Created | Already exists!')
     except Exception as e:
@@ -15,7 +15,7 @@ def create_categories_table() -> None:
 # Create brands table
 def create_brands_table() -> None:
     try:
-        db.execute_query("""CREATE TABLE IF NOT EXISTS Brands (id INTEGER PRIMARY KEY AUTOINCREMENT,  name VARCHAR(100) NOT NULL, country VARCHAR(80), description TEXT NOT NULL DEFAULT '', created_at DATETIME DEFAULT CURRENT_TIMESTAMP, updated_at DATETIME DEFAULT CURRENT_TIMESTAMP);""")
+        db.execute_query("""CREATE TABLE IF NOT EXISTS Brands (id INTEGER PRIMARY KEY AUTOINCREMENT,  name VARCHAR(100) NOT NULL UNIQUE, country VARCHAR(80), description TEXT NOT NULL DEFAULT '', created_at DATETIME DEFAULT CURRENT_TIMESTAMP, updated_at DATETIME DEFAULT CURRENT_TIMESTAMP);""")
         db.database.commit()
         print('Brands table: Created | Already exists!')
     except Exception as e:
@@ -26,7 +26,7 @@ def create_products_table() -> None:
     try:
         db.execute_query("""CREATE TABLE IF NOT EXISTS Products (
                         id INTEGER PRIMARY KEY AUTOINCREMENT,  
-                        name VARCHAR(150) NOT NULL, 
+                        name VARCHAR(150) NOT NULL UNIQUE, 
                         description TEXT DEFAULT '', 
                         cost_price REAL NOT NULL, 
                         selling_price REAL NOT NULL,
@@ -63,9 +63,11 @@ def create_trigger_to_calculate_revenue_by_product_automatically(execute:bool=Fa
             print(f'Impossible to create this trigger: {e}')
     pass
 
-create_trigger_to_calculate_revenue_by_product_automatically(execute=False)
+create_trigger_to_calculate_revenue_by_product_automatically(execute=True)
 
 # Create tables
+create_products_table()
+create_brands_table()
 create_products_table()
 
 # Select existing table names

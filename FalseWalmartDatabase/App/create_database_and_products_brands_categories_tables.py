@@ -58,6 +58,7 @@ def create_trigger_to_calculate_revenue_by_product_automatically(execute:bool=Fa
                 WHERE id = NEW.id;
             END; """
             db.execute_query(query)
+            db.database.commit()
             print('Trigger created successfully!')
         except Exception as e:
             print(f'Impossible to create this trigger: {e}')

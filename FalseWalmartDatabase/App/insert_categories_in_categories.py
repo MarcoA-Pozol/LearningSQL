@@ -20,6 +20,7 @@ def insert_categories_in_categories(execute:bool=False) -> None:
                 ('Household Items', 'Cleaning and utility products')
                 ON CONFLICT(name) DO UPDATE SET description=excluded.description;
             """)
+            db.database.commit()
             print('Categories were inserted in Categories table!')
         except Exception as e:
             print(f'Impossible to insert categories in Categories table: {e}')

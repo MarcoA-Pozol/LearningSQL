@@ -66,7 +66,7 @@ def create_trigger_to_calculate_revenue_by_product_automatically(execute:bool=Fa
 create_trigger_to_calculate_revenue_by_product_automatically(execute=True)
 
 # Create tables
-create_products_table()
+create_categories_table()
 create_brands_table()
 create_products_table()
 

@@ -44,6 +44,27 @@ def create_products_table() -> None:
     except Exception as e:
         print(f'Impossible to execute the query:{e}')
 
+# Trigger to calculate revenue by product automatically
+def create_trigger_to_calculate_revenue_by_product_automatically(execute:bool=False):
+    if execute:
+        try:
+            query = """
+            CREATE TRIGGER calculate_revenue_by_product 
+            AFTER INSERT ON Products 
+            FOR EACH ROW 
+            BEGIN 
+                UPDATE Products
+                SET revenue = NEW.selling_price - NEW.cost_price
+                WHERE id = NEW.id;
+            END; """
+            db.execute_query(query)
+            print('Trigger created successfully!')
+        except Exception as e:
+            print(f'Impossible to create this trigger: {e}')
+    pass
+
+create_trigger_to_calculate_revenue_by_product_automatically(execute=False)
+
 # Create tables
 create_products_table()
 

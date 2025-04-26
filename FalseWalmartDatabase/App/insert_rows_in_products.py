@@ -1,5 +1,12 @@
 from datetime import datetime
 import random
+from Classes.database import DatabaseConnection
+
+# Database
+DB_NAME = 'FalseWalmartDB'
+
+# Connect to database
+db = DatabaseConnection(DB_NAME)
 
 # Fixed datetime for consistency
 timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
@@ -112,3 +119,9 @@ insert_products_sql = "INSERT INTO Products (name, description, cost_price, sell
 
 insert_products_sql[:1500]  # Preview the first part
 
+try:
+    db.execute_query(query=insert_products_sql)
+    db.database.commit()
+    print('New products created successfully!')
+except Exception as e:
+    print(f'Impossible to insert new products: {e}')
